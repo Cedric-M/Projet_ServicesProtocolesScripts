@@ -20,3 +20,12 @@ git add Pictures
 git pull
 git commit -m "Added files"
 git push
+
+git add "Fiche Projet Services Protocoles Scripts.docx"
+git add "Installation Git.txt"
+git add Plannification.xlsx
+git add "Plans réseaux.vsdx"
+git status
+git push
+git commit -m "Added last files"
+git push
