@@ -23,3 +23,5 @@ echo "zone  \"$siteurl\" { "           >> /etc/bind/named.conf.local;
 echo "       type master;    "         >> /etc/bind/named.conf.local;
 echo "       file \"$siteurl.zone\ "   >> /etc/bind/named.conf.local;
 echo "};"                              >> /etc/bind/named.conf.local;
+
+/etc/init.d/bind9 restart
