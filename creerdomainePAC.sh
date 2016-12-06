@@ -1,3 +1,9 @@
+#lire les variables
+echo "entrez le nom du site"
+read sitename
+echo "entrez l'url du site"
+read siteurl
+
 #Creer le dossier du site
 cp -r /var/www/html /var/www/$sitename
 
