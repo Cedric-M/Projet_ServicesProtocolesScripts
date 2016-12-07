@@ -29,4 +29,7 @@ echo "};"                              >> /etc/bind/named.conf.local;
 
 #copy le dossier de depart
 cd ../website;
-echo "./$sitename" | sh ./copydossier.sh;
+echo "./$sitename" | sh ../Scripts/copydossier.sh;
+
+echo "Veuillez rajouter un fichier .client.visible dans tout les dossiers qui sont sense etre";
+echo " visible au client. Votre site sera mise en service ce soir-meme!"
