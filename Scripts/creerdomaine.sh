@@ -38,7 +38,7 @@ echo "               86400            ;time to live"    >> /etc/bind/$sitename.z
 echo "                                               \)" >> /etc/bind/$sitename.zone;
 echo ";"                                                >> /etc/bind/$sitename.zone;
 echo ";Name Servers"                                    >> /etc/bind/$sitename.zone;
-echo "$siteurl.                     IN           NS            $siteurl" >> /etc/bind/$sitename.zone;
+echo "$siteurl.                     IN           NS           localhost" >> /etc/bind/$sitename.zone;
 echo ";"                                                >> /etc/bind/$sitename.zone;
 
 /etc/init.d/bind9 restart;
