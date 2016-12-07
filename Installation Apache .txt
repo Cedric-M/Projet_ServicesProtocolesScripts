@@ -1,0 +1,85 @@
+ ||| Installation APACHE |||  
+
+# Mise à jour de la liste de packages
+apt-get update 
+
+#On regarde la version d'Apache installée pour correspondre 
+#Ici on a pour réponse "Server version: Apache/2.4.10 (Debian)"
+apache -v
+
+#On verifie que le serveur écoute bien 
+netstat -antp | grep apache2
+
+#un autre test consiste à faire pointer le navigateur sur l'adresse IP de la machine virtuelle 127.0.0.1
+
+ ||| Configuration APACHE |||  
+
+
+wget 127.0.0.1
+ls -la /etc/apache2/sites-enabled/
+ls -la /etc/apache2/sites-available/
+nano /etc/apache2/sites-available/000-default.conf
+nano /var/www/html/index.html
+cat 
+
+
+
+ ||| Virtualhosts |||
+#Configuration DNS
+nano /etc/hosts (127.0.0.1	www.site1projet.com
+		 127.0.0.1	www.site2projet.com )
+
+/etc/init.d/bind9 restart
+
+cd /etc/apache2/sites-available/
+cp 000-default.conf www.site1projet.com
+cp 000-default.conf www.site2projet.com
+
+nano www.site1projet.com  (ServerName www.site1projet.com
+		 	   DocumentRoot /var/www/site1projet.com
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride all 
+        </Directory>
+        <Directory /var/www/site1projet.com/>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride all 
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+        <Directory "/usr/lib/cgi-bin">
+                AllowOverride None
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                Order allow,deny
+                Allow from all
+        </Directory>
+)
+
+cd /etc/apache2/sites-enabled/
+ln -s ../sites-available/www.toto.com .
+ln -s ../sites-available/www.tutu.com .
+
+ 
+mkdir /var/www/site1projet.com/
+touch /var/www/tsite1projet.com/index.html
+echo "<html><body><h1>Bienvenus sur site1projet.com</h1></body></html>" > /var/www/site1projet.com/index.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
