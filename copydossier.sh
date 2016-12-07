@@ -14,4 +14,8 @@ else
 	echo "HIDDEN for client:'$dossierdestination' from '$dossiersource'";
 fi
 done
+
+apache2ctl restart;
+
 #a invoquer avec "find -d -s $dossiersource -type d | copydossier.sh"
+

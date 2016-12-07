@@ -4,9 +4,9 @@ read sitename;
 echo "entrez l'url du site"
 read siteurl;
 
-#Creer le dossier du site
+#Creer les dossiers du site
 cp -r /var/www/html /var/www/$sitename/;
-
+mkdir /home/user/git/Projet_ServicesProtocolesScripts/website/$sitename/;
 
 #Copier le fin du fichier de config du site par defaut vers le config du site a creer
 head -n 1  /etc/apache2/sites-enabled/000-default.conf >  "/etc/apache2/sites-enabled/$sitename";
