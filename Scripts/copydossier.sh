@@ -17,5 +17,5 @@ done
 
 apache2ctl restart;
 
-#a invoquer avec "find -d $dossiersource -type d | copydossier.sh"
+#a invoquer avec "find -d $dossiersource -type d | copydossier.sh" ... de preference dans le crontab, chaque soir!
 
