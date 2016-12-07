@@ -25,26 +25,28 @@ echo "       type master;    "         >> /etc/bind/named.conf.local;
 echo "       file \"$sitename.zone\ "   >> /etc/bind/named.conf.local;
 echo "};"                              >> /etc/bind/named.conf.local;
 
-serial=date "+%_y%_W%_u%_H%_M%_S
+serial=$(date "+%_y%_W%_u%_H%_M%_S");
+
 
 #cree le fichier de zone
-echo "$siteurl.  IN  SOA  $siteurl  admin@localhost  (" >  /etc/bind/$sitename.zone;
+echo "$siteurl.  IN  SOA  $siteurl  admin@localhost  \(" >  /etc/bind/$sitename.zone;
 echo "               $serial      ;serial"         >> /etc/bind/$sitename.zone;
 echo "               28800            ;refresh"         >> /etc/bind/$sitename.zone;
 echo "               7200             ;retry"           >> /etc/bind/$sitename.zone;
 echo "               604800           ;expire"          >> /etc/bind/$sitename.zone;
 echo "               86400            ;time to live"    >> /etc/bind/$sitename.zone;
-echo "                                               )" >> /etc/bind/$sitename.zone;
+echo "                                               \)" >> /etc/bind/$sitename.zone;
 echo ";"                                                >> /etc/bind/$sitename.zone;
 echo ";Name Servers"                                    >> /etc/bind/$sitename.zone;
 echo "$siteurl.                     IN           NS            $siteurl" >> /etc/bind/$sitename.zone;
 echo ";"                                                >> /etc/bind/$sitename.zone;
 
-/etc/init.d/bind9 restart
+/etc/init.d/bind9 restart;
 
 #copy le dossier de depart
-cd ../website;
-echo "./$sitename" | sh ../Scripts/copydossier.sh;
+cd "../website";
+echo "./$sitename" | sh "../Scripts/copydossier.sh";
 
 echo "Veuillez rajouter un fichier .client.visible dans tout les dossiers qui sont sense etre";
-echo " visible au client. Votre site sera mise en service ce soir-meme!"
+echo " visible au client. Votre site sera mise en service ce soir-meme!";
+
