@@ -69,16 +69,37 @@ echo "<html><body><h1>Bienvenus sur site1projet.com</h1></body></html>" > /var/w
 
 
 
+ ||| Virtualhosts 2 |||
 
+cd /etc/apache2/sites-available
+cp www.site1projet.com.conf www.site2projet.com.conf
+nano www.site2projet.com.conf
+________________________________________________________
+<VirtualHost www.site2projet.com:80>
 
+        ServerAdmin webmaster@localhost
+        ServerName www.site2projet.com
+        
+        DocumentRoot "/var/www/site2projet/"
 
+        <Directory "/var/www/site2projet/">
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride all 
+                Order allow,deny
+                allow from all
+        </Directory>
 
+________________________________________________________
+cd..
+cd sites-enabled
+ln -s ../sites-available/www.site2projet.com.conf
+cd
+mkdir /var/www/site2projet/
+touch /var/www/site2projet/index.html
+echo "<html><body><h1>Bienvenus sur site2projet.com</h1></body></html>" > /var/www/site2projet/index.html
 
-
-
-
-
-
+#services apache2 restart
+#services apache2 reload
 
 
 
