@@ -1,8 +1,10 @@
  ||| Installation BIND9 |||  
-https://www.digitalocean.com/community/tutorials/how-to-configure-bind-as-a-private-network-dns-server-on-ubuntu-14-04
 
+#Installation de Bind9
 apt-get install bind9
-nano /etc/default/bind9 (added :OPTIONS="-4 -u bind") #set bind in ip mode
+
+#set bind in ipv4 mode
+nano /etc/default/bind9 (added :OPTIONS="-4 -u bind") 
 
 
 MEMO:
@@ -14,22 +16,20 @@ nano /etc/bind/db.reseau.fr
 
 
 
-
  ||| Installation DNS ||| 
-
-#Installation de Bind9
-apt-get install bind9
 
 #Configuration du serveur master et déclaration des zones
 cd /etc/bind/
 nano named.conf.default-zones
-
+_______________________________________________
 zone "reseau.fr" {
                 type master;
                 file "/etc/bind/db.reseau.fr";
   
         };
+_______________________________________________
 
+#Vérification dela syntaxe du fichier named.conf
 named-checkconf /etc/bind/named.conf
 
 #Configuration de la zone du serveur master
@@ -37,8 +37,12 @@ named-checkconf /etc/bind/named.conf
 cp /etc/bind/db.local /etc/bind/db.reseau.fr
 nano /etc/bind/db.reseau.fr
 cd
+
+#On redémarre bind
 /etc/init.d/bind9 restart
-named-checkzone reseau.fr /etc/bind/db.reseau.fr # on vérifie la syntaxe du fichier de zone 
+
+# on vérifie la syntaxe du fichier de zone 
+named-checkzone reseau.fr /etc/bind/db.reseau.fr 
 
 #Verification
 /etc/init.d/bind9 restart
@@ -46,8 +50,6 @@ nano /etc/resolv.conf (added :nameserver 127.0.0.1)
 host -t ns reseau.fr 127.0.0.1
 host -t ns reseau.fr 
 host -t a ns1.reseau.fr
-
-
 
 
 

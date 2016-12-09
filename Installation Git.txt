@@ -1,5 +1,7 @@
 echo "# Projet_ServicesProtocolesScripts" >> README.md
 cd Git
+
+#On initiatialise le répertoire
 git init
 git status
 git add README.md
@@ -7,6 +9,7 @@ git commit -m "first commit"
 git remote add origin https://github.com/Cedric-M/Projet_ServicesProtocolesScripts.git
 git push -u origin master
 
+#On push sur le depot les premiers fichiers
 git status
 git add "A2 - 2016 - Projet Services Protocoles Scripts - étudiants.pdf"
 git add "Fiche de suivi.docx"
@@ -25,6 +28,8 @@ git add "Fiche Projet Services Protocoles Scripts.docx"
 git add "Installation Git.txt"
 git add Plannification.xlsx
 git add "Plans réseaux.vsdx"
+#Toutes les commandes si-dessus peuvent être remplacer par git add .
+
 git status
 git push
 git commit -m "Added last files"
