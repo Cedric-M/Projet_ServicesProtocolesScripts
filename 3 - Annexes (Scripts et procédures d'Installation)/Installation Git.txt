@@ -28,7 +28,7 @@ git add "Fiche Projet Services Protocoles Scripts.docx"
 git add "Installation Git.txt"
 git add Plannification.xlsx
 git add "Plans réseaux.vsdx"
-#Toutes les commandes si-dessus peuvent être remplacer par git add .
+#Toutes les commandes ci-dessus peuvent être remplacer par git add .
 
 git status
 git push
