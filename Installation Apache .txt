@@ -14,63 +14,63 @@ netstat -antp | grep apache2
 
  ||| Configuration APACHE |||  
 
-
+#Découverte des fichiers importants pour commencer
 wget 127.0.0.1
 ls -la /etc/apache2/sites-enabled/
 ls -la /etc/apache2/sites-available/
 nano /etc/apache2/sites-available/000-default.conf
 nano /var/www/html/index.html
-cat 
+# cat peut être utilisé aussi
 
 
 
  ||| Virtualhosts |||
-#Configuration DNS
-nano /etc/hosts (127.0.0.1	www.site1projet.com
-		 127.0.0.1	www.site2projet.com )
+#Configuration DNS ajout des associations
+nano /etc/hosts 
+____________________________________________
+	127.0.0.1	www.site1projet.com
+	127.0.0.1	www.site2projet.com 
+____________________________________________
 
 /etc/init.d/bind9 restart
 
+#Configuration des Virtualhosts
 cd /etc/apache2/sites-available/
 cp 000-default.conf www.site1projet.com
 cp 000-default.conf www.site2projet.com
 
-nano www.site1projet.com  (ServerName www.site1projet.com
-		 	   DocumentRoot /var/www/site1projet.com
-        <Directory />
-                Options FollowSymLinks
-                AllowOverride all 
-        </Directory>
-        <Directory /var/www/site1projet.com/>
+#On configure les virtualhosts dans site-available/
+nano www.site1projet.com  
+___________________________________________________________
+	<VirtualHost www.site1projet.com:80>
+        ServerAdmin webmaster@localhost
+	ServerName www.site1projet.com
+	DocumentRoot "/var/www/site1projet/"
+        <Directory "/var/www/site1projet/">
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride all 
                 Order allow,deny
                 allow from all
         </Directory>
+___________________________________________________________
 
-        ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
-        <Directory "/usr/lib/cgi-bin">
-                AllowOverride None
-                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-                Order allow,deny
-                Allow from all
-        </Directory>
-)
 
+#On active les virtualhosts dans site-enabled/
 cd /etc/apache2/sites-enabled/
-ln -s ../sites-available/www.toto.com .
-ln -s ../sites-available/www.tutu.com .
+ln -s ../sites-available/www.site1projet.com
+ln -s ../sites-available/www.site2projet.com
 
- 
+#Les virtualhosts sont prêts, on créer les répertoires et pages des sites :
 mkdir /var/www/site1projet.com/
-touch /var/www/tsite1projet.com/index.html
+touch /var/www/site1projet.com/index.html
 echo "<html><body><h1>Bienvenus sur site1projet.com</h1></body></html>" > /var/www/site1projet.com/index.html
 
+#Le premier Virtualhost fonctionne donc, on va maintenant faire le deuxième
 
 
+#Création du deuxième script
 
- ||| Virtualhosts 2 |||
-
+#Configuration du Virtualhost
 cd /etc/apache2/sites-available
 cp www.site1projet.com.conf www.site2projet.com.conf
 nano www.site2projet.com.conf
@@ -88,12 +88,16 @@ ________________________________________________________
                 Order allow,deny
                 allow from all
         </Directory>
-
 ________________________________________________________
+
+
+#On active les virtualhosts dans site-enabled/
 cd..
 cd sites-enabled
 ln -s ../sites-available/www.site2projet.com.conf
 cd
+
+#Les virtualhosts sont prêts, on créer les répertoires et pages des sites :
 mkdir /var/www/site2projet/
 touch /var/www/site2projet/index.html
 echo "<html><body><h1>Bienvenus sur site2projet.com</h1></body></html>" > /var/www/site2projet/index.html
