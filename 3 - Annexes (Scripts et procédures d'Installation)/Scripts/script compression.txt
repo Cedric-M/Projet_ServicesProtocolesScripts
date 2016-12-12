@@ -1,0 +1,25 @@
+#ce que l'on veut sauvegarder
+$src = "C:/Projects"
+
+#ou est ce que l'on veut sauvegarder
+$dst = "//10.0.2.4/Partage"
+
+#date d'aujoudhui
+$date = (get-date).date
+
+
+#Parcours l'ensemble des repertoires de Projects
+
+Foreach ($element in get-childitem $src)
+{
+    #recuperation de la date de la derniere modification de l'element
+    	$dateelement = $element.lastwritetime.date
+
+    #compare la date du jour avec la date de l'element
+   	 if($date -eq $dateelement){
+
+        $zip = $element.FullName + '.zip'
+        Get-Item $element | Compress-tozip $zip
+        move-item $zip $dst
+    }
+}
