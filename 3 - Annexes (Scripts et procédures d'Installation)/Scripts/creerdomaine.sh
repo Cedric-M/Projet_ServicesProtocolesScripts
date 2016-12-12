@@ -10,7 +10,7 @@ siteurl="www.$sitename.com"
 cp -n -r /var/www/html /var/www/$sitename/;
 
 #Copier le fin du fichier de config du site par defaut vers le config du site a creer
-sed "r/site1projet0/0$sitename/" </etc/apache2/sites-available/www.site1projet.com.conf > "/etc/apache2/sites-available/$siteurl.conf";
+sed "r/site1projet/$sitename/" </etc/apache2/sites-available/www.site1projet.com.conf > "/etc/apache2/sites-available/$siteurl.conf";
 
 #Ajouter le site a la fin du fichier de configuration de bind
 echo "zone  \"$siteurl\" { "           >> /etc/bind/named.conf.local;
